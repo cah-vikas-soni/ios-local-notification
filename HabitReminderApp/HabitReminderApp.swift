@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 @main
-struct HabitReminderAppApp: App {
+struct HabitReminderApp: App {
     let persistenceController = PersistenceController.shared
+
+    init() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, _ in
+            print("Permission granted: \(granted)")
+        }
+    }
 
     var body: some Scene {
         WindowGroup {
